@@ -14,11 +14,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include"cppimpl.h"
-#include<stdexcept>
+#pragma once
 
-void do_something(bool should_throw) {
-    if(should_throw) {
-        throw std::runtime_error("Some error message.");
-    }
-}
+struct Error {
+    char *message;
+};
+
+struct Error* new_error(const char *msg);
+void free_error(struct Error *err);
+
+void do_something(int should_error, struct Error **err);

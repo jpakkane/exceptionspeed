@@ -14,11 +14,18 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include"cppimpl.h"
-#include<stdexcept>
+#include"cimpl.h"
+#include"common.h"
+#include<stdlib.h>
 
-void do_something(bool should_throw) {
-    if(should_throw) {
-        throw std::runtime_error("Some error message.");
+int main(int argc, char **argv) {
+    const int should_throw = argc > 1 ? 1 : 0;
+    for(int i=0; i<NUM_ITERATIONS; i++) {
+        struct Error *err = NULL;
+        do_something(should_throw, &err);
+        if(err) {
+            free_error(err);
+        }
     }
+    return 0;
 }

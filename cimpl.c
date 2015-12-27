@@ -14,11 +14,25 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include"cppimpl.h"
-#include<stdexcept>
+#define _GNU_SOURCE
 
-void do_something(bool should_throw) {
-    if(should_throw) {
-        throw std::runtime_error("Some error message.");
+#include"cimpl.h"
+#include<stdlib.h>
+#include<string.h>
+
+struct Error* new_error(const char *msg) {
+    struct Error *err = malloc(sizeof(struct Error));
+    err->message = strdup(msg);
+    return err;
+}
+
+void free_error(struct Error *err) {
+    free(err->message);
+    free(err);
+}
+
+void do_something(int should_error, struct Error **err) {
+    if(should_error) {
+        *err = new_error("Some error message.");
     }
 }
