@@ -3,3 +3,4 @@ project('exception speed test', 'c', 'cpp',
 
 exe = executable('cppspeed', 'cppspeed.cpp', 'cppimpl.cpp')
 benchmark('exceptions, not thrown', exe)
+benchmark('exceptions, thrown', exe, args : ['yes'])

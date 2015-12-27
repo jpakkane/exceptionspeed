@@ -19,9 +19,10 @@
 #include<exception>
 
 int main(int argc, char **argv) {
+    const bool should_throw = argc > 1;
     for(int i=0; i<NUM_ITERATIONS; i++) {
         try {
-            do_something(false);
+            do_something(should_throw);
         } catch(const std::exception &e) {
         }
     }
