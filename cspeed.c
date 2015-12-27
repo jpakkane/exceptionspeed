@@ -20,7 +20,8 @@
 
 int main(int argc, char **argv) {
     const int should_throw = argc > 1 ? 1 : 0;
-    for(int i=0; i<NUM_ITERATIONS; i++) {
+    int i;
+    for(i=0; i<NUM_ITERATIONS; i++) {
         struct Error *err = NULL;
         do_something(should_throw, &err);
         if(err) {
